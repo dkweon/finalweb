@@ -5,10 +5,19 @@
   <img src="abc.jpg" class="stretch" />
 </div>
 
+
 <div class="row">
 <div class="col-md-4">
+
+
 <ul>
+
 <% @all_albums.each do |album| %>
+
+<div class="container1">
+<img src = '<%= album.picture %>' />
+</div>
+
  <ol>
   <form action= '/delete/<%= album.id %>' style='display:inline'>
     <input type= 'submit'  class="button" value='Delete' />
@@ -26,6 +35,7 @@
   <form action='/new_album' method='POST' style='center'>
     <strong>Add a new album:</strong>
     <input type='text' name='name' placeholder='Name of the album.' />
+    <input type='text' name='picture' placeholder='Profile picture' />
     <input type='submit'  class="button" value='Save'/>
   </form>
 

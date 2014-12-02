@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20141128065449) do
 
   create_table "albums", force: true do |t|
     t.string "name"
+    t.string "picture"
   end
 
   create_table "photos", force: true do |t|

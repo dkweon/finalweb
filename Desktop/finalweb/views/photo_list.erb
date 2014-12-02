@@ -1,38 +1,71 @@
+<!-- back ground -->
+
 <div id="background">
   <img src="a.jpg" class="stretch" />
 </div>
 
-<h1>Welcome to Web Album</h1>
+<!-- Title  -->
+<h1><%= @album.name %> Album</h1>
 
-
+<!-- Body -->
 
 <% @all_photos.each do |photo| %>
 
 
-<div class="row">
-  <div class="col-md-4">
-
-  <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
-    <input type='submit' class="button" value='Delete' />
-  </form>
+<div class="container2">
   <img src = '<%= photo.picture %>' />
-  <%= 'The story about this picture: '%>
-  <%= photo.description %>
-  <%= 'This photo is taken on: '%>
-  <%= photo.date %>
-  </p>
+</div>
+
+
+
+<div class="infobox">
+
+  <div>
+  <h2><%= '"' + photo.description + '"'  %></h2>
+</div>
+  <div>
+  <%= 'DATE: ' + photo.date %>
+</div>
+<div>
+  <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+  <input type='submit' class="button" value='Delete' />
+</form>
+</div>
+
+
+
+
+</div>
+
+
+
 <% end %>
 
+<!-- submitting section -->
+
+<form class="addphotoform" action='/<%= @album.id %>/new_photo' method='POST'>
+  <h2>Add a new photo:</h2>
+<div>
+  <input type='text' name='picture' placeholder='Write down the URL.' />
 </div>
+<div>
+  <input type='text' name='description' placeholder='Title of the photo.' />
+</div>
+<div>
+  <input type='text' name='date' placeholder='When was it taken?' />
+</div>
+<div>
+  <textarea id='msg' name='notes' placeholder='What is it about?'></textarea>
+</div>
+<div>
+  <input type='submit'  class="button" value='Save'/>
 </div>
 
-<form action='/<%= @album.id %>/new_photo' method='POST'>
-  <strong>Add a new photo:</strong>
-  <input type='text' name='picture' placeholder='Write down the URL.' />
-  <input type='text' name='description' placeholder='Describe the photo.' />
-  <input type='text' name='date' placeholder='When was it taken?' />
-  <input type='submit'  class="button" value='Save'/>
 </form>
 
+
+
 <br />
+
+
 <a href= '/'> Click: Going back to album lists! </a>

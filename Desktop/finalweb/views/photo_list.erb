@@ -1,0 +1,38 @@
+<div id="background">
+  <img src="a.jpg" class="stretch" />
+</div>
+
+<h1>Welcome to Web Album</h1>
+
+
+
+<% @all_photos.each do |photo| %>
+
+
+<div class="row">
+  <div class="col-md-4">
+
+  <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+    <input type='submit' class="button" value='Delete' />
+  </form>
+  <img src = '<%= photo.picture %>' />
+  <%= 'The story about this picture: '%>
+  <%= photo.description %>
+  <%= 'This photo is taken on: '%>
+  <%= photo.date %>
+  </p>
+<% end %>
+
+</div>
+</div>
+
+<form action='/<%= @album.id %>/new_photo' method='POST'>
+  <strong>Add a new photo:</strong>
+  <input type='text' name='picture' placeholder='Write down the URL.' />
+  <input type='text' name='description' placeholder='Describe the photo.' />
+  <input type='text' name='date' placeholder='When was it taken?' />
+  <input type='submit'  class="button" value='Save'/>
+</form>
+
+<br />
+<a href= '/'> Click: Going back to album lists! </a>

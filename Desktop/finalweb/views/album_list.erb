@@ -1,0 +1,33 @@
+
+<h1>Album list</h1>
+
+<div id="background">
+  <img src="abc.jpg" class="stretch" />
+</div>
+
+<div class="row">
+<div class="col-md-4">
+<ul>
+<% @all_albums.each do |album| %>
+ <ol>
+  <form action= '/delete/<%= album.id %>' style='display:inline'>
+    <input type= 'submit'  class="button" value='Delete' />
+  </form>
+    <a href= '/<%= album.id %>'> <%= album.name %> </a>
+  </ol>
+  <% end %>
+</ul>
+</div>
+</div>
+
+
+<br />
+
+  <form action='/new_album' method='POST' style='center'>
+    <strong>Add a new album:</strong>
+    <input type='text' name='name' placeholder='Name of the album.' />
+    <input type='submit'  class="button" value='Save'/>
+  </form>
+
+
+</div>

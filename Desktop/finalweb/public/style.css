@@ -12,6 +12,13 @@ h2 {
   color: #FFFFFF;
 }
 
+h3 {
+  text-align: center;
+  font-family: "Sans-serif", Verdana;
+  font-size: 40px;
+  color: #000000;
+}
+
 a:hover {
   color: red; /* the hyperline */
 }
@@ -26,6 +33,8 @@ body {
 #background {
 
   background-color:#000000;
+
+  opacity: 0.8;
 
   width: 100%;
   height: 100%;
@@ -109,7 +118,25 @@ width: percentage((@columns / @grid-columns));
 
 */
 
+/* LOGIN LIST ----------------------------------------------------------*/
 
+.welcomebox {
+
+  text-align: center;
+  /* Just to center the form on the page */
+  margin-top: 5px;
+  margin-left: 400px;
+  margin-right: 400px;
+  /* To see the outline of the form */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+
+}
+
+.welcomebox div + div {
+  margin-top: 1em;
+}
 
 
 /* ALBUM LIST ----------------------------------------------------------*/

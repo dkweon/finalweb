@@ -1,0 +1,35 @@
+
+<h1>WELCOME!</h1>
+
+<div id="background">
+  <img src="ab.jpg" class="stretch" />
+</div>
+
+
+<div class="welcomebox">
+
+  <h3>Sign in:</h3>
+  <form action='/new_user' method='POST'>
+    <div>
+      <input type='text' name='new_user_id' placeholder='Create New' />
+    </div>
+
+    <div>
+      <input type='submit'  class="button" value='Save'/>
+    </div>
+  </form>
+
+  <h3>Login:</h3>
+  <form action='/login' method='POST'>
+    <div>
+      <input type='text' name='user_id' placeholder='Enter User ID' />
+    </div>
+
+    <div>
+      <input type='submit'  class="button" value='Save'/>
+    </div>
+  </form>
+
+
+
+</div>

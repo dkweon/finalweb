@@ -1,28 +1,13 @@
-# app.rb
-
-# use bundler
 require 'rubygems'
 require 'bundler/setup'
-# load all of the gems in the gemfile
+
 Bundler.require
 
+require './models/Album'
 require './models/User'
 require './models/Photo'
-require './models/Album'
 
-
-# enable cookie-based sessions
 enable :sessions
-# set a secret used to encrypt the session cookie
-# NOTE: best practice would be to store this value in
-# an enviroment variable like ENV['SESSION_SECRET'] so
-# that it's not checked in with our source code. For
-# simplicity's sake, I'm not doing that here (but that means
-# that anyone who can see this source code would be able to
-# spoof cookies for this application)
-#set :session_secret, '95txrIIvTDe0AWPCvbeXuXXpULCWZgpoRo1LqY8YsR9GAbph0jfOHosvtY4QFxi6'
-
-
 
 if ENV['DATABASE_URL']
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
@@ -34,17 +19,13 @@ else
   )
 end
 
-# define a route for the root of the site
-
 before do
   @user = User.find_by(name: session[:name])
 end
 
-### USER ###
-
 get '/' do
   if @user
-    @albums = @user.albums.order(:name)
+    @all_albums = @user.albums.order(:name)
     erb :album_list
   else
     erb :login
@@ -81,47 +62,66 @@ post '/new_user' do
   end
 end
 
-
-get '/user' do
-  @all_albums = Album.all.order(:name)
-  erb :album_list
-end
-
-post '/new_album' do
-  @user.albums.create(name: params[:name], picture: params[:picture])
-  redirect "/"
-end
-
-get '/album' do
-  @album = Album.find(params[:name])
-  @all_photos = @album.albums.order(:duw)
-  erb :photo_list
-end
-
-post '/new_photo' do
-  @user.albums.create(name: params[:name], picture: params[:picture])
-  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  #Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  redirect "/#{params[:album]}"
-end
-
-
-
-### DELETE ###
-
-get '/:album/delete/:photo' do
-  Photo.find(params[:photo]).destroy
-  redirect "/#{params[:album]}"
-end
-
 get '/delete_user' do
   @user.destroy
   redirect '/'
 end
 
-get '/delete_album/:album' do
-  @album_list = Album.find(params[:album])
-  @user = @album_list.user
-  @album_list.destroy
-  redirect "/"
+post '/new_album' do
+  #@user = User.find(params[:user])
+  @user.albums.create(params)
+  redirect '/'
 end
+
+get '/delete/:album' do
+  @album = Album.find(params[:album])
+  #@user = @album.user
+  @album.destroy
+  redirect '/'
+end
+
+post '/share' do
+  user = User.find_by(name: params[:username])
+  if user.nil?
+    @message = "User not found."
+    erb :message_page
+  else
+    @message = "YAY"
+    erb :message_page
+  end
+  redirect '/'
+end
+
+get '/:album' do
+  @album = Album.find(params[:album])
+  #@user = @album.user
+  @all_photos = @album.photos.order(:date)
+  erb :photo_list
+end
+
+#post '/:album/new_photo' do
+  #Album.find(params[:album]).photos.create
+  #@album = Album.find(params[:album])
+  #@album.photos.create(params)
+  ##"Hello World"
+  ##@album = Album.find(params[:album])
+  ##@user = @album.user
+  ##@album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  #redirect "/"
+#end
+
+#post '/:album/new_photo' do
+  #Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  #@album = Album.find(params[:album])
+  #@user = @album.user
+  #@album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  #redirect "/"
+#end
+
+#get '/delete/:photo' do
+  #@photo = Photo.find_by(params[:photo])
+  #@album = @photo.album
+  #@user = @album.user
+  #@photo.destroy
+  #redirect "/"
+#end

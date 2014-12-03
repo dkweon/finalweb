@@ -19,6 +19,13 @@ h3 {
   color: #000000;
 }
 
+h4 {
+  font-family: "Sans-serif", Verdana;
+  font-size: 23px;
+  color: #000000;
+}
+
+
 a:hover {
   color: red; /* the hyperline */
 }
@@ -149,6 +156,8 @@ width: percentage((@columns / @grid-columns));
   width: 100%;
   height: auto;
 }
+
+
 
 /* PHOTOLIST ----------------------------------------------------------*/
 

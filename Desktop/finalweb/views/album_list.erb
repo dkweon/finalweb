@@ -6,17 +6,6 @@
 </div>
 
 
-<div class="row">
-<div class="col-md-4">
-
-
-<ul>
-
-<% @all_albums.each do |album| %>
-
-<div class="container1">
-<img src = '<%= album.picture %>' />
-</div>
 
  <ol>
   <form action= '/delete/<%= album.id %>' style='display:inline'>
@@ -24,11 +13,15 @@
   </form>
     <a href= '/<%= album.id %>'> <%= album.name %> </a>
   </ol>
-  <% end %>
-</ul>
-</div>
-</div>
 
+
+  <% @all_albums.each do |album| %>
+
+  <div class="container1">
+    <img src = '<%= album.picture %>' />
+  </div>
+
+  <% end %>
 
 <br />
 
@@ -38,6 +31,3 @@
     <input type='text' name='picture' placeholder='Profile picture' />
     <input type='submit'  class="button" value='Save'/>
   </form>
-
-
-</div>

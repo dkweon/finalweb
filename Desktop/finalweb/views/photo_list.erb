@@ -7,40 +7,6 @@
 <!-- Title  -->
 <h1><%= @album.name %> Album</h1>
 
-<!-- Body -->
-
-<% @all_photos.each do |photo| %>
-
-
-<div class="container2">
-  <img src = '<%= photo.picture %>' />
-</div>
-
-
-
-<div class="infobox">
-
-  <div>
-  <h2><%= '"' + photo.description + '"'  %></h2>
-</div>
-  <div>
-  <%= 'DATE: ' + photo.date %>
-</div>
-<div>
-  <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
-  <input type='submit' class="button" value='Delete' />
-</form>
-</div>
-
-
-
-
-</div>
-
-
-
-<% end %>
-
 <!-- submitting section -->
 
 <form class="addphotoform" action='/<%= @album.id %>/new_photo' method='POST'>
@@ -63,9 +29,42 @@
 
 </form>
 
-
-
 <br />
 
+<!-- Body -->
+
+<% @all_photos.each do |photo| %>
+
+
+<div class="container2">
+  <img src = '<%= photo.picture %>' />
+</div>
+
+
+
+<div class="infobox">
+
+  <div>
+    <h2><%= '"' + photo.description + '"'  %></h2>
+  </div>
+  <div>
+    <%= 'DATE: ' + photo.date %>
+  </div>
+  <div>
+    <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+      <input type='submit' class="button" value='Delete' />
+    </form>
+  </div>
+
+
+
+
+</div>
+
+
+
+<% end %>
+
+<br />
 
 <a href= '/'> Click: Going back to album lists! </a>

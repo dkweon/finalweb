@@ -10,8 +10,12 @@
 
   <h3>Sign in:</h3>
   <form action='/new_user' method='POST'>
+
     <div>
-      <input type='text' name='new_user_id' placeholder='Create New' />
+      <input class = "form-control" type='text' name='name' placeholder='Create New ID' />
+    </div>
+    <div>
+      <input class="form-control" type="password" name="password" placeholder='Create New Password' />
     </div>
 
     <div>
@@ -21,13 +25,19 @@
 
   <h3>Login:</h3>
   <form action='/login' method='POST'>
+
     <div>
-      <input type='text' name='user_id' placeholder='Enter User ID' />
+      <input class = "form-control" type='text' name='name' placeholder='Create New ID' />
+    </div>
+    <div>
+      <input class="form-control" type="password" name="password" placeholder='Create New Password' />
     </div>
 
     <div>
       <input type='submit'  class="button" value='Save'/>
     </div>
+
+
   </form>
 
 

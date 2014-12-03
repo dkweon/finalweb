@@ -20,7 +20,7 @@ enable :sessions
 # simplicity's sake, I'm not doing that here (but that means
 # that anyone who can see this source code would be able to
 # spoof cookies for this application)
-set :session_secret, '95txrIIvTDe0AWPCvbeXuXXpULCWZgpoRo1LqY8YsR9GAbph0jfOHosvtY4QFxi6'
+#set :session_secret, '95txrIIvTDe0AWPCvbeXuXXpULCWZgpoRo1LqY8YsR9GAbph0jfOHosvtY4QFxi6'
 
 
 
@@ -37,10 +37,10 @@ end
 # define a route for the root of the site
 
 before do
-  @user = User.find_by(userid: session[:name])
+  @user = User.find_by(name: session[:name])
 end
 
-### GET ###
+### USER ###
 
 get '/' do
   if @user
@@ -51,23 +51,24 @@ get '/' do
   end
 end
 
+post '/login' do
+  user = User.find_by(name: params[:name])
+  if user.nil?
+    @message = "User not found."
+    erb :message_page
+  elsif user.authenticate(params[:password])
+    session[:name] = user.name
+    redirect '/'
+  else
+    @message = "Incorrect password."
+    erb :message_page
+  end
+end
+
 get '/logout' do
   session.clear
   redirect '/'
 end
-
-get '/:user' do
-  @all_albums = Album.all.order(:name)
-  erb :album_list
-end
-
-get '/:user/:album' do
-  @album = Album.find(params[:name])
-  @all_photos = @album.albums.order(:duw)
-  erb :photo_list
-end
-
-### POST ###
 
 post '/new_user' do
   @user = User.create(params)
@@ -80,29 +81,31 @@ post '/new_user' do
   end
 end
 
+
+get '/user' do
+  @all_albums = Album.all.order(:name)
+  erb :album_list
+end
+
 post '/new_album' do
   @user.albums.create(name: params[:name], picture: params[:picture])
   redirect "/"
 end
 
+get '/album' do
+  @album = Album.find(params[:name])
+  @all_photos = @album.albums.order(:duw)
+  erb :photo_list
+end
 
 post '/new_photo' do
   @user.albums.create(name: params[:name], picture: params[:picture])
-  @album = photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   #Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   redirect "/#{params[:album]}"
 end
 
-post '/login' do
-  user = User.find_by(name: params[:name])
 
-  if user.nil?
-    @message = "User not found."
-    session[:name] = user.names
-    erb :message_page
-    redirect '/'
-  end
-end
 
 ### DELETE ###
 

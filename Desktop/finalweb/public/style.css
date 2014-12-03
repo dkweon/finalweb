@@ -124,7 +124,7 @@ width: percentage((@columns / @grid-columns));
 
   text-align: center;
   /* Just to center the form on the page */
-  margin-top: 5px;
+  margin-bottom: 50px;
   margin-left: 400px;
   margin-right: 400px;
   /* To see the outline of the form */

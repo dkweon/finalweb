@@ -108,13 +108,19 @@ post '/new_background' do
 end
 
 
-post '/new_photo' do
-  #@user = User.find(params[:user])
-  @album.photos.create(params)
+post '/:album/new_photo' do
+  @album = Album.find(params[:album])
+  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   redirect '/'
 end
 
-
+get '/delete/:photo' do
+  @photo = Photo.find(params[:photo])
+  #@album = @photo.album
+  #@user = @album.user
+  @photo.destroy
+  redirect "/"
+end
 
 
 #post '/:album/new_photo' do

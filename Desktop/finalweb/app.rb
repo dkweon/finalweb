@@ -94,10 +94,28 @@ end
 
 get '/:album' do
   @album = Album.find(params[:album])
-  #@user = @album.user
   @all_photos = @album.photos.order(:date)
   erb :photo_list
 end
+
+
+post '/new_background' do
+  backa = Album.find_by(back_album: params[:back_album])
+
+
+
+  erb :background
+end
+
+
+post '/new_photo' do
+  #@user = User.find(params[:user])
+  @album.photos.create(params)
+  redirect '/'
+end
+
+
+
 
 #post '/:album/new_photo' do
   #Album.find(params[:album]).photos.create

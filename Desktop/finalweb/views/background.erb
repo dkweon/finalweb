@@ -1,0 +1,37 @@
+<div class="panel">
+  <div class="panel-body">
+    <form class="addphotoform" action="/background" method='POST' style='center'>
+      <h4 class="list-group-item-heading">Add background picture: </h4>
+      <div class="form-group">
+
+        <!-- change the background.erb background -->
+
+        <div id="background">
+          <img src='<%= album.back_album %>' class="stretch" />
+        </div>
+
+        <input class="form-control" type='text' name='pic' placeholder='Album Background' />
+
+
+        <form action= '/new_background' style='display:inline'>
+          <button type= 'submit' class="btn btn-danger">View </button>
+        </form>
+
+      </div>
+      </form>
+
+      <!-- change the album list's background
+
+      <form action= '/delete/<%= album.id %>' style='display:inline'>
+        <button type= 'submit' class="btn btn-danger">Save </button>
+      </form>
+
+    -->
+
+
+
+    </form>
+  </div>
+</div>
+
+<a href="/" class="btn btn-danger"> Go back to album lists!</a>

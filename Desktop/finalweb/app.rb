@@ -3,10 +3,9 @@ require 'bundler/setup'
 
 Bundler.require
 
-require './models/Album'
-require './models/User'
-require './models/Photo'
-require './models/Back'
+require './models/Album.rb'
+require './models/User.rb'
+require './models/Photo.rb'
 
 
 enable :sessions
@@ -27,8 +26,6 @@ before do
   @user = User.find_by(name: session[:name])
 end
 
-
-#album list display
 get '/' do
   if @user
     @all_albums = @user.albums.order(:name)
@@ -57,7 +54,6 @@ get '/logout' do
   redirect '/'
 end
 
-
 post '/new_user' do
   @user = User.create(params)
   if @user.valid?
@@ -74,18 +70,20 @@ get '/delete_user' do
   redirect '/'
 end
 
-
-post '/new_album' do
-  @user.albums.create(name: params[:name], picture: params[:picture])
-  redirect '/'
-end
-
 get '/delete/:album' do
   @album = Album.find(params[:album])
   @album.destroy
   redirect '/'
 end
 
+post '/new_album' do
+  @user.albums.create(name: params[:name], picture: params[:picture])
+  redirect '/'
+end
+
+post '/new_album_member' do
+  add_member_to_album(params['name'], params['id'])
+end
 
 get '/:album' do
   @album = Album.find(params[:album])
@@ -93,42 +91,16 @@ get '/:album' do
   erb :photo_list
 end
 
-get '/:album/back_lists' do
-  @album = Album.find(params[:album])
-  @all_backs = @album.backs.order(:back_album)
-  erb :back_list
-end
-
-
-post '/:album/new_background' do
-  @album = Album.find(params[:album])
-  @album.backs.create(back_album: params[:back_album])
-  redirect "/#{params[:album]}"
-end
-
 post '/:album/new_photo' do
   @album = Album.find(params[:album])
-  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date], notes: params[:notes])
+  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   redirect "/#{params[:album]}"
 end
-
-
 
 get '/:album/delete/:photo' do
   @album = Album.find(params[:album])
   @photo = Photo.find(params[:photo])
-  #@album = @photo.album
-  #@user = @album.user
   @photo.destroy
-  redirect "/#{params[:album]}"
-end
-
-get '/:photo/delete/:back_album' do
-  @photo = Photo.find(params[:photo])
-  @back_album = Back.find(params[:back_album])
-  #@album = @photo.album
-  #@user = @album.user
-  @back_album.destroy
   redirect "/#{params[:album]}"
 end
 
@@ -139,17 +111,17 @@ helpers do
     album = Album.find(album_id)
 
     #name.each do |e|
-    new_member = User.find_by(name: name.strip)
+      new_member = User.find_by(name: name.strip)
 
-    if new_member && @user.albums.include?(album) #new_member has an account and user is associated with group
-      unless new_member.albums.include?(album)
-        new_member.albums << album #new_member is added to group
-        #Balance.create(user: new_member, group: group)
+      if new_member && @user.albums.include?(album) #new_member has an account and user is associated with group
+        unless new_member.albums.include?(album)
+          new_member.albums << album #new_member is added to group
+          #Balance.create(user: new_member, group: group)
+        end
+      else #not registered or @user is not associated with given group => send email to join.
+        @message = "This user does not have an account"
+        erb :message_page
       end
-    else #not registered or @user is not associated with given group => send email to join.
-      @message = "This user does not have an account"
-      erb :message_page
-    end
     #end
     #calculate_balances(group)
     redirect '/'

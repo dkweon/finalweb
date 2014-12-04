@@ -4,23 +4,41 @@
 
 <h1> Album: <%= @album.name %></h1>
 
-
+<!-- Body -->
 <% @all_photos.each do |photo| %>
-<p>
-  <img src = '<%= photo.picture %>' />
-  <%= 'The story about this picture:'%>
-  <%= photo.description %>
-  <%= 'This photo is taken on:'%>
-  <%= photo.date %>
-  <form action= '/delete/<%= photo.id %>' style='display:inline'>
-    <button type= 'submit' class="btn btn-danger">Delete </button>
-  </form>
-</p>
-<% end %>
 
+<table>
+  <tr>
+    <th><img src = '<%= photo.picture %>' class="container2" align=left /></th>
+    <th>
+      <div class="infobox">
+
+        <div>
+          <h2><%= '"' + photo.description + '"' %></h2>
+        </div>
+        <div>
+          <%= 'DATE: ' + photo.date %>
+        </div>
+        <div>
+          <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+            <button type= 'submit' class="btn btn-danger">
+              <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Delete </button>
+            </form>
+
+          </div>
+        </div>
+      </th>
+  </tr>
+</table>
+
+
+<% end %>
+<br />
+
+<!-- submitting section -->
 <div class="panel">
   <div class="panel-body">
-    <form class="addphotoform" action="/<%= @album.id %>/new_photo" method='POST' style='center'>
+      <form class="addphotoform" action="/<%= @album.id %>/new_photo" method='POST' style='center'>
       <h4 class="list-group-item-heading">Add a new photo:</h4>
 
       <div class="form-group">
@@ -30,7 +48,8 @@
         <input class="form-control" type='text' name='description' placeholder='Describe the photo.' />
       </div>
       <div class="form-group">
-        <input class="form-control" type='text' name='date' placeholder='When was it taken?' />
+        <input class="form-control" type="text" id="datepicker" name='date' placeholder='When was it taken?' />
+        
       </div>
 
 

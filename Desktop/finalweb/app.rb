@@ -99,27 +99,26 @@ get '/:album' do
 end
 
 
-post '/new_background' do
-  backa = Album.find_by(back_album: params[:back_album])
-
-
-
+post '/:album/new_background' do
+  backa = Album.find(params[:back_album])
   erb :background
+  redirect "/#{params[:album]}"
 end
 
 
 post '/:album/new_photo' do
   @album = Album.find(params[:album])
   @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  redirect '/'
+  redirect "/#{params[:album]}"
 end
 
-get '/delete/:photo' do
+get '/:album/delete/:photo' do
+  @album = Album.find(params[:album])
   @photo = Photo.find(params[:photo])
   #@album = @photo.album
   #@user = @album.user
   @photo.destroy
-  redirect "/"
+  redirect "/#{params[:album]}"
 end
 
 

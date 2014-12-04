@@ -1,0 +1,52 @@
+
+<!-- 1. to add a jpg imag* or url -->
+  <div class="panel">
+    <div class="panel-body">
+      <form class="addphotoform" action="/<%= @album.id %>/new_background" method='POST' style='center'>
+        <h4 class="list-group-item-heading">Add a background picture: </h4>
+        <div class="form-group">
+          <input class="form-control" type='text' name='back_album' placeholder='Background URL' />
+        </div>
+        <div class="form-group">
+          <form action= '/new_background' style='display:inline'>
+            <button type='submit' class="btn btn-info">Add to Background List</button>
+          </form>
+          <form action= '/new_background' style='display:inline'>
+            <button type='submit' class="btn btn-primary">Save it as Album Background</button>
+          </form>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!-- 2. view the saved pictures from database -->
+
+<br />
+
+<% @all_backs.each do |back| %>
+
+<div class="radio-inline">
+  <input type="radio" name="backp"/>
+  <label><img src='<%= back.back_album %>' alt='<%= back.id %>' /></label>
+  <form action='/<%= @photo.id %>/delete/<%= back.id %>' style='display:inline'>
+    <button type= 'submit' class="btn btn-danger">
+      <span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
+    </form>
+</div>
+
+
+
+
+
+<% end %>
+
+<br />
+
+
+<!-- 3. change the background and auto. go back to album* -->
+
+
+
+
+
+<a href="/" class="btn btn-danger"> Go back to album lists!</a>

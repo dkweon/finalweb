@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203175155) do
+ActiveRecord::Schema.define(version: 20141204151644) do
 
   create_table "albums", force: true do |t|
     t.string  "name"
     t.integer "user_id"
     t.string  "picture"
+    t.boolean "active",  default: true
+  end
+
+  create_table "albums_users", force: true do |t|
+    t.integer "album_id"
+    t.integer "user_id"
+  end
+
+  create_table "backs", force: true do |t|
     t.string  "back_album"
+    t.integer "album_id"
   end
 
   create_table "photos", force: true do |t|
@@ -29,9 +39,10 @@ ActiveRecord::Schema.define(version: 20141203175155) do
   end
 
   create_table "users", force: true do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.string "password"
+    t.string  "name"
+    t.string  "password_digest"
+    t.string  "password"
+    t.boolean "active",          default: true
   end
 
 end

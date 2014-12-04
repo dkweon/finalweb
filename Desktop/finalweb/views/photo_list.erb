@@ -1,7 +1,3 @@
-<div id="background">
-  <img src="a.jpg" class="stretch" />
-</div>
-
 <h1> Album: <%= @album.name %></h1>
 
 <!-- Body -->
@@ -9,7 +5,7 @@
 
 <table>
   <tr>
-    <th><img src = '<%= photo.picture %>' class="container2" align=left /></th>
+    <th><img src = '<%= photo.picture %>' class="container2"/></th>
     <th>
       <div class="infobox">
 
@@ -20,12 +16,15 @@
           <%= 'DATE: ' + photo.date %>
         </div>
         <div>
+          <%= photo.notes %>
+        </div>
+        <div>
           <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
             <button type= 'submit' class="btn btn-danger">
               <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Delete </button>
             </form>
 
-          </div>
+        </div>
         </div>
       </th>
   </tr>
@@ -49,9 +48,11 @@
       </div>
       <div class="form-group">
         <input class="form-control" type="text" id="datepicker" name='date' placeholder='When was it taken?' />
-        
-      </div>
 
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="textarea" rows= "3"; name='notes' placeholder='What is it about?' />
+      </div>
 
       <form action= '/new_photo' style='display:inline'>
         <button type='submit' class="btn btn-primary">Save</button>
@@ -63,6 +64,6 @@
 
 <p>
   <a href="/logout" class="btn btn-default">logout</a>
-  <a href="/" class="btn btn-warning">To change the background</a>
+  <a href="/<%= @album.id %>/back_lists" class="btn btn-warning">To change the background</a>
   <a href="/" class="btn btn-danger">Click: Going back to album lists!</a>
 </p>

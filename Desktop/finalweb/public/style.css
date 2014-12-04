@@ -14,7 +14,7 @@ h2 {
 
 h3 {
   text-align: center;
-  font-family: "Sans-serif", Verdana;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: 40px;
   color: #000000;
 }
@@ -24,6 +24,8 @@ h4 {
   font-size: 23px;
   color: #000000;
 }
+
+
 
 
 a:hover {
@@ -56,15 +58,10 @@ body {
   height:100%;
 }
 
-table, th {
+table, th, tr {
   border-style: none;
   align: center;
-}
-
-td {
-  font: font-family: "Gill Sans", "Gill Sans MT", sans-serif;
-  color: #FFFFFF;
-
+  text-align: center;
 }
 
 /*GENERAL NOT DONE------------------------------------------------*/
@@ -106,35 +103,6 @@ ul, ol {
 
 
 
-
-
-
-
-/*
-
-.row {
-margin-left:  (@gutter / -2);
-margin-right: (@gutter / -2);
-}
-
-.make-md-column(@columns; @gutter: @grid-gutter-width) {
-position: relative;
-min-height: 1px;
-padding-left:  (@gutter / 2);
-padding-right: (@gutter / 2);
-
-@media (min-width: @screen-md-min) {
-float: left;
-width: percentage((@columns / @grid-columns));
-}
-}
-
-.contain-main {
-.make-md-column(4);
-}
-
-*/
-
 /* LOGIN LIST ----------------------------------------------------------*/
 
 .welcomebox {
@@ -158,8 +126,8 @@ width: percentage((@columns / @grid-columns));
 
 /* ALBUM LIST ----------------------------------------------------------*/
 .container1 {
-  width: 80px;
-  height: 80px;
+  width: 130px;
+  height: 200px;
 }
 
 .container1 img {
@@ -167,7 +135,20 @@ width: percentage((@columns / @grid-columns));
   height: auto;
 }
 
+table#t1, th, td {
+  border: 1px solid transparent;
+  align: center;}
 
+td {
+  font: font-family: "Gill Sans", "Gill Sans MT", sans-serif;
+  text-align: center;
+
+}
+
+label {
+  color: black;
+  font-size: 17px;
+}
 
 /* PHOTOLIST ----------------------------------------------------------*/
 
@@ -193,6 +174,9 @@ width: percentage((@columns / @grid-columns));
   padding: 1em;
   border: 1px solid #CCC;
   border-radius: 1em;
+
+  width: 300px;
+  height: 250px;
 
 }
 
@@ -251,4 +235,25 @@ input:focus, textarea:focus {
 
 .addphotoform div + div {
   margin-top: 1em;
+}
+
+/* BACKLIST ----------------------------------------------------------*/
+
+.container3 {
+  width: 150px;
+  height: 200px;
+}
+
+.container3 img {
+  width: 100%;
+  height: auto;
+}
+
+#back_photo label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#back_photo label img {
+  padding: 3px;
 }

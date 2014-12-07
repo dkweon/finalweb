@@ -12,18 +12,21 @@
             <a href= '/<%= album.id %>' ><img src = '<%= album.picture %>' class="container1"/></a>
           </th>
           <td width="500px" height="50px">
-            <!-- share the album with... -->
-            <form class="form-inline" action="/new_album_member?id=<%= album.id %>" method="POST">
-              <% album_users = ''%>
-              <div class="form-group">
-                <label>Share album with:</label>
-                <input type='text' class="form-control" name='name' value="<%= album_users%>" placeholder='Type User Name'>
-              </div>
-              <button type="submit" class="btn btn-success">Share now!</button>
-            </form>
+
 
             <% album.users.each do |user| %>
             <%= 'Members:'+ user.name + ' '%>
+            <% end %>
+            <form class="form-inline" action="/new_album_member?id=<%= album.id %>" method="POST">
+              <% album_users = ''%>
+              <strong>Who do you want to share your album with?</strong>
+              <input type ='text' name='name' placeholder='username' value="<%= album_users%>" />
+              <input type= 'submit' value='Share' />
+            </form>
+
+            <%= 'Members:'%>
+            <% album.users.each do |user| %>
+            <%= user.name + ' '%>
             <% end %>
             <form action="/new_album_member?id=<%= album.id %>" method="POST">
               <% album_users = ''%>
@@ -31,6 +34,7 @@
               <input type ='text' name='name' placeholder='username' value="<%= album_users%>" />
               <input type= 'submit' value='Share' />
             </form>
+
 
           </td>
         </tr>

@@ -6,6 +6,7 @@ Bundler.require
 require './models/Album.rb'
 require './models/User.rb'
 require './models/Photo.rb'
+require './models/Back.rb'
 
 
 enable :sessions
@@ -91,16 +92,37 @@ get '/:album' do
   erb :photo_list
 end
 
+get '/:album/back_lists' do
+  @album = Album.find(params[:album])
+  @all_backs = @album.backs.order(:number)
+  "Hello World"
+
+  erb :back_list
+end
+
 post '/:album/new_photo' do
   @album = Album.find(params[:album])
   @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   redirect "/#{params[:album]}"
 end
 
+post '/:album/new_back' do
+  @album = Album.find(params[:album])
+  @album.backs.create(image: params[:image])
+  redirect "/#{params[:back_lists]}"
+end
+
 get '/:album/delete/:photo' do
   @album = Album.find(params[:album])
   @photo = Photo.find(params[:photo])
   @photo.destroy
+  redirect "/#{params[:album]}"
+end
+
+get '/:album/delete/:back' do
+  @album = Album.find(params[:album])
+  @back = Back.find(params[:image])
+  @back.destroy
   redirect "/#{params[:album]}"
 end
 

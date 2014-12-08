@@ -28,5 +28,5 @@ Go to http://web-group-album.herokuapp.com/
 
 ## Screenshots
 
-![screen shot 2014-09-23 at 1 28 18 pm](https://raw.githubusercontent.com/dkweon/finalweb/tree/master/Desktop/finalweb/public/1.jpg)
+![screen shot 2014-09-23 at 1 28 18 pm](https://raw.githubusercontent.com/dkweon/finalweb/tree/master/Desktop/finalweb/public/a.jpg)
 
